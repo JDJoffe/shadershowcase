@@ -15,7 +15,7 @@ public class MoveObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
-        transform.position =startPos + new Vector3(Mathf.Cos(Time.time),Mathf.Tan(Time.time),Mathf.Sin(Time.time));
+        transform.position =startPos + new Vector3(0,Mathf.Tan(Time.time),0);
       
     }
 }

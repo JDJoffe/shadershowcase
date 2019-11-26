@@ -1,4 +1,4 @@
-﻿Shader "Custom/WorldPosShader"
+﻿Shader "Custom/GlassDistort"
 {
     Properties
     {
@@ -23,7 +23,6 @@
 
         struct Input
         {
-            float3 worldPos;
             float2 uv_MainTex;
         };
 
@@ -31,12 +30,6 @@
         half _Metallic;
         fixed4 _Color;
 
-        float random(float2 r)
-        {
-           // return frac(tan(r.x)*3.14*5*.5+.75);
-           //return sin(r.x)*cos(r.x)*3.14*.5+.75;
-           return frac(r.xy)*3.14 *.5+.75;
-        }
         // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
         // See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
         // #pragma instancing_options assumeuniformscaling
@@ -47,12 +40,12 @@
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             // Albedo comes from a texture tinted by color
-           
-            o.Albedo.rgb = float3(random(IN.worldPos.xy), random(IN.worldPos.yz), random(IN.worldPos.zx));
+            fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
+            o.Albedo = c.rgb;
             // Metallic and smoothness come from slider variables
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
-          // o.Alpha = 1;
+            o.Alpha = c.a;
         }
         ENDCG
     }
