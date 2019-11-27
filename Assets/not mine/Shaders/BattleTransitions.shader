@@ -1,6 +1,6 @@
 ﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-Shader "Hidden/BattleTransitions"
+Shader "Custom2/BattleTransitions"
 {
 	Properties
 	{
@@ -18,10 +18,12 @@ Shader "Hidden/BattleTransitions"
 
 			Pass
 			{
-			 Tags { "Queue"="Geometry+1" }
+			 Tags { "RenderType"="Transparent" "Queue"="Transparent" }
 			// No culling or depth
-			/*Cull Off ZWrite Off*/ ZTest Always
+			ZTest LEqual ZWrite On 
 			//ZWrite Off
+
+			Blend SrcAlpha OneMinusSrcAlpha
 			
 				CGPROGRAM
 				#pragma vertex vert

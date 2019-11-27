@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: glass
-  m_Shader: {fileID: 4800000, guid: 7af3fbed3521c9b42a33a7c3e65dbd3a, type: 3}
+  m_Name: Glass
+  m_Shader: {fileID: 4800000, guid: fae14038c45507641aa517b2bf402cb0, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
