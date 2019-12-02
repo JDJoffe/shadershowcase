@@ -13,12 +13,15 @@ public class Player : MonoBehaviour
     public float minimumVert = -45.0f;
     public float maximumVert = 45.0f;
     private float rotationVert = 0;
+   public Fog fog;
+   bool enableFog = false;
     // Start is called before the first frame update
     void Start()
     {
         character = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        fog = GetComponentInChildren<Fog>();
     }
 
     // Update is called once per frame
@@ -44,6 +47,13 @@ public class Player : MonoBehaviour
         movement *= Time.deltaTime;
         movement = transform.TransformDirection(movement);
         character.Move(movement);
+
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            enableFog = !enableFog;
+         fog.enabled = enableFog;
+        }
+        
     }
     public void rotation()
     {
