@@ -6,7 +6,7 @@
         _color("Tint",Color) = (1,1,1,1)
 	    _Fogcolor("Fog color",Color) =(0,0,0,0)
         _Depth("depth strength",float) = 1.0
-        _Dist("depth distance",float) = -0.09
+        _Distance("depth distance",float) = -0.09
     }
     SubShader
     {
@@ -43,9 +43,9 @@
                 v2f o;
               //  o.pos = UnityObjectToClipPos (v.vertex);
                // o.uv = ComputeScreenPos (o.pos);
-              / o.vertex = UnityObjectToClipPos(v.vertex);
+               o.uv = UnityObjectToClipPos(v.vertex);
                 UNITY_TRANSFER_DEPTH(o.uv);
-                o.uv = v.uv;
+                o.pos = v.vertex;
                 return o;
             }
             // half4 frag2(v2f T) : SV_Target
@@ -64,7 +64,7 @@
             sampler2D _MainTex;
             sampler2D _CameraDepthTexture; 
             half _Depth;
-            half _Dist;
+            half _Distance;
             fixed4 _color;
             fixed4 _Fogcolor;
 
@@ -72,10 +72,13 @@
             {
                 // float2 uv = i.uv.xy / i.uv.y;
                 // half lin = LinearEyeDepth(tex2D(_CameraDepthTexture,uv).r);
-                // half dist = i.uv.y - _Dist;
+                // half dist = i.uv.y - _Distance;
                 // half depth = lin - dist;
                 // return lerp (half4(1,1,1,0),_color,saturate(depth * _Depth));
-               fixed4 col = tex2D(_MainTex, i.uv);
+				float2 direction = float2(cos(_Distance * UNITY_PI * 2), sin(_Distance * UNITY_PI * 2));
+				 float l = _Depth + sin(_Distance+_Time.y) * cos(_Distance+_Time.y);
+               fixed4 col = tex2D(_MainTex, + direction* _Time.x * _Distance )* _color;
+			   col = lerp(_color, _Fogcolor, smoothstep(l-_Distance*.5, l+_Distance*.5, _Distance));
              //  float camdepth =tex2D(_CameraDepthTexture,col);
               //  fixed4 coldepth = tex2D(_MainTex,camdepth)
               //  float4 _CameraDepthTexture = float4(i.uv,i.vertex)
@@ -83,7 +86,7 @@
              //  col.r = coldepth.r * camdepth  ;
              //  col.g = coldepth.g *camdepth   ;
              //  col.b = coldepth.b *camdepth  ;
-             //  col.rgb = 1*coldepth.rgb;
+             //  col.rgb = 1*coldepth.rgb;		 
                return col;
             }
             ENDCG
