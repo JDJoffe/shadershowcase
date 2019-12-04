@@ -12,10 +12,11 @@
     {
         // No culling or depth
         Cull Off ZWrite Off ZTest Always
-//  Tags { "RenderType"="Transparent" "Queue"="Transparent" }
+  Tags { "RenderType"="Transparent" "Queue"="Transparent" }
 //         LOD 200
        
 //         ZWrite Off
+    Blend SrcAlpha OneMinusSrcAlpha
         Pass
         {
             CGPROGRAM
@@ -75,13 +76,15 @@
                 // half dist = i.uv.y - _Distance;
                 // half depth = lin - dist;
                 // return lerp (half4(1,1,1,0),_color,saturate(depth * _Depth));
-				float2 direction = float2(cos(_Distance * UNITY_PI * 2), sin(_Distance * UNITY_PI * 2));
-				 float l = _Depth + sin(_Distance+_Time.y) * cos(_Distance+_Time.y);
-               fixed4 col = tex2D(_MainTex, + direction* _Time.x * _Distance )* _color;
-			   col = lerp(_color, _Fogcolor, smoothstep(l-_Distance*.5, l+_Distance*.5, _Distance));
+				//float2 direction = float2(cos(_Distance * UNITY_PI * 2), sin(_Distance * UNITY_PI * 2));
+				// float l = _Depth + sin(_Distance+_Time.y) * cos(_Distance+_Time.y);
+               //fixed4 col = tex2D(_MainTex, + direction* _Time.x * _Distance )* _color;
+			   //col = lerp(_color, _Fogcolor, smoothstep(l-_Distance*.5, l+_Distance*.5, _Distance));
              //  float camdepth =tex2D(_CameraDepthTexture,col);
               //  fixed4 coldepth = tex2D(_MainTex,camdepth)
               //  float4 _CameraDepthTexture = float4(i.uv,i.vertex)
+              float4 col = 1;
+              col.rgb = Linear01Depth(tex2D(_CameraDepthTexture, i.uv))*_ProjectionParams.z/20;
              ////   just invert the colors
              //  col.r = coldepth.r * camdepth  ;
              //  col.g = coldepth.g *camdepth   ;

@@ -666,7 +666,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shaderMaterial: {fileID: 2100000, guid: af02358d1cf8a7d41b98ce60dac21382, type: 2}
-  _Distance: 0.6
+  _Distance: 1
 --- !u!1 &560928402
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,11 +20,14 @@ public class Fog : MonoBehaviour
         
         GetComponent<Camera>().depthTextureMode = DepthTextureMode.Depth;
     }
-
+private void Update() 
+{
+    
+}
     void OnRenderImage(RenderTexture src, RenderTexture dest)
     {
-        Vector2 dist = new Vector2(transform.position.x, transform.position.y);
-        shaderMaterial.SetVector("_Distance", dist);
+        //Vector2 dist = new Vector2(transform.position.x, transform.position.y);
+        //shaderMaterial.SetVector("_Distance", dist);
         Graphics.Blit(src, dest, shaderMaterial);
     }
 }
