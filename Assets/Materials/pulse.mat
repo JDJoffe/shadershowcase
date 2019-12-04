@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: fog
-  m_Shader: {fileID: 4800000, guid: 8e70336a0a0157741ba1e98915a2bcd7, type: 3}
+  m_Name: pulse
+  m_Shader: {fileID: 4800000, guid: 75684165a373c7a4eabcfb9a86149c31, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -41,13 +41,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 10.93, y: 1}
-        m_Offset: {x: 4.39, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _NormalMap:
+    - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -59,19 +55,13 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Texture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
-    - _Depth: 107.8
+    - _Depth: 1
     - _DetailNormalMapScale: 1
-    - _Dist: -0.09
-    - _Distance: 20
+    - _Distance: 0
     - _DstBlend: 0
-    - _Fix: -0.09
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -85,7 +75,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 0.03529412}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Fogcolor: {r: 0, g: 0.13692284, b: 1, a: 0}
-    - _color: {r: 1, g: 0, b: 0, a: 0}
+    - _Fogcolor: {r: 0, g: 0, b: 0, a: 0}
+    - _color: {r: 1, g: 1, b: 1, a: 1}

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
-public class Fog : MonoBehaviour
+public class Pulse : MonoBehaviour
 {
 
     public Material shaderMaterial;
-    [SerializeField, Range(5, 50)]
-    float _Distance = 20;
+  public  float _Distance = 0;
+  float acceleration;
     Vector2 depthtex;
+    public bool activated;
+    bool deactivate;
     public float Distance
     {
         get { return _Distance; }
@@ -22,7 +24,34 @@ public class Fog : MonoBehaviour
     }
 private void Update() 
 {
-    
+    if(Input.GetKeyDown(KeyCode.E))
+    {
+        activated = true;     
+    }
+    if(activated)
+    {
+        acceleration ++;
+ _Distance += 5*Time.deltaTime*acceleration;
+    }
+    if(_Distance >= 500)
+    {
+        activated = false;
+        deactivate = true;
+      
+        acceleration = 0;
+       
+    }
+    if(deactivate)
+    {
+  acceleration ++;
+        _Distance -= 10*Time.deltaTime*acceleration;
+    }
+    if  (_Distance <= 0)
+    {
+        _Distance = 0;
+        deactivate = false;
+
+    }
 }
     void OnRenderImage(RenderTexture src, RenderTexture dest)
     {

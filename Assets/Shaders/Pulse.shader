@@ -1,4 +1,4 @@
-﻿Shader "Custom/CamFog"
+﻿Shader "Custom/Pulse"
 {
     Properties
     {
@@ -71,25 +71,12 @@
 
             fixed4 frag(v2f i) : SV_Target
             {
-                // float2 uv = i.uv.xy / i.uv.y;
-                // half lin = LinearEyeDepth(tex2D(_CameraDepthTexture,uv).r);
-                // half dist = i.uv.y - _Distance;
-                // half depth = lin - dist;
-                // return lerp (half4(1,1,1,0),_color,saturate(depth * _Depth));
-				//float2 direction = float2(cos(_Distance * UNITY_PI * 2), sin(_Distance * UNITY_PI * 2));
-				// float l = _Depth + sin(_Distance+_Time.y) * cos(_Distance+_Time.y);
-               //fixed4 col = tex2D(_MainTex, + direction* _Time.x * _Distance )* _color;
-			   //col = lerp(_color, _Fogcolor, smoothstep(l-_Distance*.5, l+_Distance*.5, _Distance));
-             //  float camdepth =tex2D(_CameraDepthTexture,col);
-              //  fixed4 coldepth = tex2D(_MainTex,camdepth)
-              //  float4 _CameraDepthTexture = float4(i.uv,i.vertex)
-              float4 col = 1;
-              col.rgb = Linear01Depth(tex2D(_CameraDepthTexture, i.uv))*_ProjectionParams.z/_Distance;
-             ////   just invert the colors
-             //  col.r = coldepth.r * camdepth  ;
-             //  col.g = coldepth.g *camdepth   ;
-             //  col.b = coldepth.b *camdepth  ;
-             //  col.rgb = 1*coldepth.rgb;		 
+             
+                float4 col = tex2D(_MainTex, i.uv);
+                float d = Linear01Depth(tex2D(_CameraDepthTexture, i.uv))*_ProjectionParams.z/_Distance;
+                col.rgb = lerp(col.rgb, 0, 1-saturate(d));
+               
+                
                return col;
             }
             ENDCG
